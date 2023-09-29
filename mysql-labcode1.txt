@@ -1,0 +1,12 @@
+use collage
+create table groups1(gid int primary key,Gname varchar(40))
+select * from groups1
+create table Student1(Rollno int unique not null,sname varchar(40) not null,marks int check (marks<=100) not null,gid int, constraint  foreign key(gid) references groups1(gid))
+select * from student1
+insert into groups1 values(1,'ECE'),(2,'CSE'),(3,'IT')
+insert into student1 values(100,'SURYA',75,1),(101,'RAVI',67,1),(102,'SITA',97,2)
+select * from groups1 A inner join student1 B on A.gid=B.gid
+select gid,sum(marks) from student1 group by gid
+update student1 set marks=97 where sname='SURYA'
+select * from student1 where marks=(SELECT MARKS FROM STUDENT1 WHERE SNAME ='SITA')
+select * from GROUPS1 where GID NOT IN (SELECT DISTINCT GID FROM STUDENT1)
